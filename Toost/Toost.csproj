@@ -14,7 +14,7 @@
 		<PackageReleaseNotes>Initial release: version 1.0.0</PackageReleaseNotes>
 		<RepositoryUrl>https://github.com/saifsaidi/Toost</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Copyright>Copyright © Saif Saidi (Saif Al-Saidi) 2025</Copyright>
 		<PackageTags>Blazor, ASP.NET, Toast, Notifications, UI, Components</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -25,6 +25,13 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<PackageProjectUrl>https://github.com/saifsaidi/Toost</PackageProjectUrl>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
