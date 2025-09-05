@@ -1,0 +1,85 @@
+@implements IDisposable
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="@Style">
+
+    <!-- Icon -->
+    <div class="toast-icon @GetBgColorClasses()">
+        <svg class="toast-icon-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+             fill="currentColor" viewBox="0 0 20 20">
+            <path d="@IconPath"></path>
+        </svg>
+    </div>
+
+    <!-- Content -->
+    <div class="toast-content">
+        <p class="toast-title">@ToastInstance.Title</p>
+        @if (!string.IsNullOrWhiteSpace(ToastInstance.Message))
+        {
+            <p class="toast-message">@ToastInstance.Message</p>
+        }
+    </div>
+
+    <!-- Close button -->
+    <button type="button" class="toast-close" @onclick="() => OnClose.InvokeAsync()" aria-label="Close notification">
+        <svg class="toast-close-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M1 1l6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    </button>
+
+    <!-- Timer Progress -->
+    <div class="toast-timer"
+         style="animation-duration:@($"{ToastInstance.Duration}ms"); background-color:@GetProgressColor();">
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter, EditorRequired] public IToostInstance ToastInstance { get; set; }
+    [Parameter, EditorRequired] public EventCallback OnClose { get; set; }
+    [Parameter] public required string Style { get; set; }
+
+    private CancellationTokenSource? _cts;
+
+    protected override void OnInitialized()
+    {
+        _cts = new CancellationTokenSource();
+        _ = AutoCloseAsync(_cts.Token);
+    }
+
+    private async Task AutoCloseAsync(CancellationToken token)
+    {
+        try
+        {
+            await Task.Delay(ToastInstance.Duration, token);
+            if (!token.IsCancellationRequested)
+                await OnClose.InvokeAsync();
+        }
+        catch (TaskCanceledException) { }
+    }
+
+    public void Dispose()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+    }
+
+    private string GetProgressColor() => ToastInstance.Type switch
+    {
+        AlertType.Success => "#22c55e", // green
+        AlertType.Error => "#ef4444",   // red
+        AlertType.Warning => "#eab308", // yellow
+        _ => "#3b82f6",                 // blue
+    };
+
+    private string GetBgColorClasses() => ToastInstance.Type switch
+    {
+        AlertType.Success => "toast-success",
+        AlertType.Error => "toast-error",
+        AlertType.Warning => "toast-warning",
+        _ => "toast-info",
+    };
+
+
+    private string IconPath => ToastInstance.Type switch { AlertType.Success => "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z", AlertType.Error => "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z", AlertType.Warning => "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z", _ => "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z", };
+}

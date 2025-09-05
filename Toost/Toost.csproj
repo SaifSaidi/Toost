@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>Toost</AssemblyName>
+		<LangVersion>latest</LangVersion>
+		<PackageId>Toost</PackageId>
+		<Title>Toost</Title>
+		<Authors>Saif Saidi (Saif Al-Saidi)</Authors>
+		<Description>Lightweight, fast, and easy-to-use toast notifications for Blazor applications.</Description>
+		<PackageVersion>1.0.0</PackageVersion>
+		<PackageReleaseNotes>Initial release: version 1.0.0</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/saifsaidi/Toost</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<Copyright>Copyright © Saif Saidi (Saif Al-Saidi) 2025</Copyright>
+		<PackageTags>Blazor, ASP.NET, Toast, Notifications, UI, Components</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IsPackable>true</IsPackable>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<PackageProjectUrl>https://github.com/saifsaidi/Toost</PackageProjectUrl>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+	  
+  </ItemGroup>
+
+	<ItemGroup>
+		<!-- net8.0 -->
+		<PackageReference Include="Microsoft.AspNetCore.Components" Condition="'$(TargetFramework)' == 'net8.0'" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Condition="'$(TargetFramework)' == 'net8.0'" Version="8.0.0" />
+
+		<!-- net9.0 -->
+		<PackageReference Include="Microsoft.AspNetCore.Components" Condition="'$(TargetFramework)' == 'net9.0'" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Condition="'$(TargetFramework)' == 'net9.0'" Version="9.0.0" />
+	</ItemGroup>
+
+</Project>

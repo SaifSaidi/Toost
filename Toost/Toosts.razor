@@ -1,0 +1,67 @@
+@using Toost.Internal
+@inject ToostService ToostService
+@implements IDisposable
+
+<div class="toast-container @PositionClass" data-position="@Position.ToString().ToLower()">
+    @foreach (var (toast, index) in Toasts.Select((toast, index) => (toast, index)))
+    {
+        <Toost @key="toast.Id"
+               ToastInstance="toast"
+               OnClose="() => RemoveToast(toast.Id)"
+               Style=@($"--index: {index}; --offset: {index * 4}px; --scale: {1 - (index * 0.08)}; z-index: {Toasts.Count - index};") />
+    }
+</div>
+
+@code {
+    [Parameter] public Position Position { get; set; } = Position.BottomRight;
+    private const int MAX_TOASTS = 3;
+
+    private string PositionClass => Position switch
+    {
+        Position.TopRight => "toast-container-top-right",
+        Position.TopLeft => "toast-container-top-left",
+        Position.BottomRight => "toast-container-bottom-right",
+        Position.BottomLeft  => "toast-container-bottom-left",
+        Position.TopCenter => "toast-container-top-center",
+        Position.BottomCenter => "toast-container-bottom-center",
+        _ => "toast-container-top-right"
+    };
+
+    private List<IToostInstance> Toasts { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        ToostService.OnShow += ShowToast;
+    }
+
+    private void ShowToast(object? sender, ToostInstance toast)
+    {
+        InvokeAsync(() =>
+        {
+            Toasts.Insert(0, toast);
+            if (Toasts.Count > MAX_TOASTS)
+            {
+                Toasts.RemoveAt(Toasts.Count - 1);
+            }
+            StateHasChanged();
+        });
+    }
+
+    private void RemoveToast(Guid toastId)
+    {
+        InvokeAsync(() =>
+        {
+            var toastInstance = Toasts.SingleOrDefault(x => x.Id == toastId);
+            if (toastInstance != null)
+            {
+                Toasts.Remove(toastInstance);
+                StateHasChanged();
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        ToostService.OnShow -= ShowToast;
+    }
+}
