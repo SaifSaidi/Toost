@@ -1,4 +1,4 @@
-.toast-container {
+.toost-container {
     position: fixed;
     z-index: 1055;
     display: flex;
@@ -10,45 +10,45 @@
     perspective: 800px;
 }
 
-.toast-container-top-right {
+.toost-container-top-right {
     top: 0;
     right: 0;
 }
 
-.toast-container-top-left {
+.toost-container-top-left {
     top: 0;
     left: 0;
 }
 
-.toast-container-bottom-right {
+.toost-container-bottom-right {
     bottom: 0;
     right: 0;
 }
 
-.toast-container-bottom-left {
+.toost-container-bottom-left {
     bottom: 0;
     left: 0;
 }
 
-.toast-container-top-center {
+.toost-container-top-center {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.toast-container-bottom-center {
+.toost-container-bottom-center {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.toast-container-top-center {
+.toost-container-top-center {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.toast-container-bottom-center {
+.toost-container-bottom-center {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);

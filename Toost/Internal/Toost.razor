@@ -1,33 +1,33 @@
 @implements IDisposable
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="@Style">
+<div class="toost" role="alert" aria-live="assertive" aria-atomic="true" style="@Style">
 
     <!-- Icon -->
-    <div class="toast-icon @GetBgColorClasses()">
-        <svg class="toast-icon-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+    <div class="toost-icon @GetBgColorClasses()">
+        <svg class="toost-icon-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
              fill="currentColor" viewBox="0 0 20 20">
             <path d="@IconPath"></path>
         </svg>
     </div>
 
     <!-- Content -->
-    <div class="toast-content">
-        <p class="toast-title">@ToastInstance.Title</p>
+    <div class="toost-content">
+        <p class="toost-title">@ToastInstance.Title</p>
         @if (!string.IsNullOrWhiteSpace(ToastInstance.Message))
         {
-            <p class="toast-message">@ToastInstance.Message</p>
+            <p class="toost-message">@ToastInstance.Message</p>
         }
     </div>
 
     <!-- Close button -->
-    <button type="button" class="toast-close" @onclick="() => OnClose.InvokeAsync()" aria-label="Close notification">
-        <svg class="toast-close-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+    <button type="button" class="toost-close" @onclick="() => OnClose.InvokeAsync()" aria-label="Close notification">
+        <svg class="toost-close-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M1 1l6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
         </svg>
     </button>
 
     <!-- Timer Progress -->
-    <div class="toast-timer"
+    <div class="toost-timer"
          style="animation-duration:@($"{ToastInstance.Duration}ms"); background-color:@GetProgressColor();">
     </div>
 </div>
@@ -74,10 +74,10 @@
 
     private string GetBgColorClasses() => ToastInstance.Type switch
     {
-        AlertType.Success => "toast-success",
-        AlertType.Error => "toast-error",
-        AlertType.Warning => "toast-warning",
-        _ => "toast-info",
+        AlertType.Success => "toost-success",
+        AlertType.Error => "toost-error",
+        AlertType.Warning => "toost-warning",
+        _ => "toost-info",
     };
 
 

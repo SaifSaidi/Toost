@@ -18,7 +18,7 @@
     to { transform: translateX(0); opacity: 1; }
 }
 
-.toast {
+.toost {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -33,23 +33,23 @@
     transform: scale(var(--scale, 1)) translateY(var(--offset, 0));
 }
 
-:global([data-position^="top"]) .toast {
+:global([data-position^="top"]) .toost {
     animation: slide-in-top 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-:global([data-position^="bottom"]) .toast {
+:global([data-position^="bottom"]) .toost {
     animation: slide-in-bottom 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-:global([data-position$="left"]) .toast {
+:global([data-position$="left"]) .toost {
     animation: slide-in-left 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-:global([data-position$="right"]) .toast {
+:global([data-position$="right"]) .toost {
     animation: slide-in-right 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.toast-icon {
+.toost-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -60,45 +60,45 @@
     color: #fff;
 }
 
-.toast-icon-svg {
+.toost-icon-svg {
     width: 1.25rem;
     height: 1.25rem;
 }
 
-.toast-success {
+.toost-success {
     background-color: #22c55e;
 }
 
-.toast-error {
+.toost-error {
     background-color: #ef4444;
 }
 
-.toast-warning {
+.toost-warning {
     background-color: #eab308;
 }
 
-.toast-info {
+.toost-info {
     background-color: #3b82f6;
 }
 
-.toast-content {
+.toost-content {
     flex-grow: 1;
 }
 
-.toast-title {
+.toost-title {
     margin: 0;
     font-weight: 600;
     font-size: 0.875rem;
     color: #1f2937;
 }
 
-.toast-message {
+.toost-message {
     margin: 0;
     font-size: 0.875rem;
     color: #6b7280;
 }
 
-.toast-close {
+.toost-close {
     margin-left: auto;
     padding: 0.25rem;
     border: none;
@@ -108,16 +108,16 @@
     transition: color 0.2s;
 }
 
-.toast-close:hover {
+.toost-close:hover {
     color: #1f2937;
 }
 
-.toast-close-svg {
+.toost-close-svg {
     width: 1rem;
     height: 1rem;
 }
 
-.toast-timer {
+.toost-timer {
     position: absolute;
     bottom: 0;
     left: 0;

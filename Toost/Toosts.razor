@@ -2,13 +2,13 @@
 @inject ToostService ToostService
 @implements IDisposable
 
-<div class="toast-container @PositionClass" data-position="@Position.ToString().ToLower()">
+<div class="toost-container @PositionClass" data-position="@Position.ToString().ToLower()">
     @foreach (var (toast, index) in Toasts.Select((toast, index) => (toast, index)))
     {
         <Toost @key="toast.Id"
                ToastInstance="toast"
                OnClose="() => RemoveToast(toast.Id)"
-               Style=@($"--index: {index}; --offset: {index * 4}px; --scale: {1 - (index * 0.08)}; z-index: {Toasts.Count - index};") />
+               Style=@($"--index: {index}; --offset: {index * 4 }px; --scale: {1 - (index * 0.04)}; z-index: {Toasts.Count - index};") />
     }
 </div>
 
@@ -18,13 +18,13 @@
 
     private string PositionClass => Position switch
     {
-        Position.TopRight => "toast-container-top-right",
-        Position.TopLeft => "toast-container-top-left",
-        Position.BottomRight => "toast-container-bottom-right",
-        Position.BottomLeft  => "toast-container-bottom-left",
-        Position.TopCenter => "toast-container-top-center",
-        Position.BottomCenter => "toast-container-bottom-center",
-        _ => "toast-container-top-right"
+        Position.TopRight => "toost-container-top-right",
+        Position.TopLeft => "toost-container-top-left",
+        Position.BottomRight => "toost-container-bottom-right",
+        Position.BottomLeft => "toost-container-bottom-left",
+        Position.TopCenter => "toost-container-top-center",
+        Position.BottomCenter => "toost-container-bottom-center",
+        _ => "toost-container-top-right"
     };
 
     private List<IToostInstance> Toasts { get; set; } = new();
