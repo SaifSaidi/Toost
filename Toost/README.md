@@ -8,14 +8,14 @@ Lightweight, fast, and easy-to-use toast notifications for Blazor applications.
     dotnet add package Toost
     ```
 
-2.  In your `Program.cs` (or `Startup.cs`), register the Toost service.
+2.  In your `Program.cs`, register the Toost service.
     ```csharp
-    builder.Services.AddToostServices();
+    builder.Services.AddToost();
     ```
 
-3.  In your `MainLayout.razor` (or wherever you want the toasts to appear), add the `Toosts` component.
+3.  Add the `<Toosts />` component to your main layout file (e.g., `MainLayout.razor` or `App.razor`).
     ```razor
-    <Toosts />
+    <Toosts @rendermode="InteractiveServer" />
     ```
 
 ## Usage
@@ -32,6 +32,7 @@ Lightweight, fast, and easy-to-use toast notifications for Blazor applications.
     ToostService.Warning("This is a warning message.");
     ToostService.Error("This is an error message.");
     ```
+Each method accepts an optional `duration` parameter in milliseconds (default is 5000ms).
 
 ## Configuration
 
@@ -48,13 +49,19 @@ builder.Services.AddToostServices(options =>
 You can also configure the position of the toasts by setting the `Position` parameter on the `Toosts` component.
 
 ```razor
-<Toosts Position="Position.TopLeft" />
+<Toosts @rendermode="InteractiveServer" Position="Position.TopLeft" />
 ```
 
 Available positions:
-- `TopRight` (default)
+- `TopRight`
 - `TopLeft`
-- `BottomRight`
+- `BottomRight` (default)
 - `BottomLeft`
 - `TopCenter`
 - `BottomCenter`
+
+You can also show the time the toast was created by setting the `ShowTime` parameter to `true`.
+
+```razor
+<Toosts ShowTime="true" />
+```
