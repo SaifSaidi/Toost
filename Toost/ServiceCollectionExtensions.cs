@@ -5,10 +5,10 @@ namespace Toost;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddToostServices(this IServiceCollection services) =>
-        services.AddToostServices(_ => { });
+    public static IServiceCollection AddToost(this IServiceCollection services) =>
+        services.AddToost(_ => { });
 
-    public static IServiceCollection AddToostServices(this IServiceCollection services, Action<ToostOptions> options) 
+    public static IServiceCollection AddToost(this IServiceCollection services, Action<ToostOptions> options) 
     {
 
         ArgumentNullException.ThrowIfNull(services);
