@@ -1,24 +1,8 @@
-@keyframes slide-in-top {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slide-in-bottom {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slide-in-left {
-    from { transform: translateX(-100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slide-in-right {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
 .toost {
+    --scale: calc(1 - var(--index) * 0.05);
+    --offset: calc(var(--index) * 1rem);
+    --opacity: calc(1 - var(--index) * 0.1);
+
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -26,60 +10,22 @@
     width: 100%;
     max-width: 22rem;
     border-radius: 0.5rem;
-    background-color: #fff;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background-color: hsl(0 0% 100%);
+    border: 1px solid hsl(0 0% 91%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    transform: scale(var(--scale, 1)) translateY(var(--offset, 0));
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(var(--offset)) scale(var(--scale));
+    opacity: var(--opacity, 1);
+    animation: slide-in 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-:global([data-position^="top"]) .toost {
-    animation: slide-in-top 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+@keyframes slide-in {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
-:global([data-position^="bottom"]) .toost {
-    animation: slide-in-bottom 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
 
-:global([data-position$="left"]) .toost {
-    animation: slide-in-left 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-:global([data-position$="right"]) .toost {
-    animation: slide-in-right 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.toost-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    color: #fff;
-}
-
-.toost-icon-svg {
-    width: 1.25rem;
-    height: 1.25rem;
-}
-
-.toost-success {
-    background-color: #22c55e;
-}
-
-.toost-error {
-    background-color: #ef4444;
-}
-
-.toost-warning {
-    background-color: #eab308;
-}
-
-.toost-info {
-    background-color: #3b82f6;
-}
 
 .toost-content {
     flex-grow: 1;
@@ -87,29 +33,34 @@
 
 .toost-title {
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.875rem;
-    color: #1f2937;
+    color: hsl(0 0% 9%);
 }
 
 .toost-message {
     margin: 0;
     font-size: 0.875rem;
-    color: #6b7280;
+    color: hsl(0 0% 39%);
 }
+
 
 .toost-close {
     margin-left: auto;
-    padding: 0.25rem;
-    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
     background-color: transparent;
-    color: #9ca3af;
+    border: 1px solid hsl(0 0% 80%);
+    color: hsl(0 0% 45%);
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: all 0.2s;
 }
 
 .toost-close:hover {
-    color: #1f2937;
+    background-color: hsl(0 0% 90%);
+    color: hsl(0 0% 9%);
 }
 
 .toost-close-svg {
@@ -118,19 +69,22 @@
 }
 
 .toost-timer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    width: 100%;
-    animation: progress linear forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@keyframes progress {
+.progress-circle {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: progress-circle linear forwards;
+}
+
+@keyframes progress-circle {
     from {
-        width: 100%;
+        stroke-dashoffset: 0;
     }
     to {
-        width: 0;
+        stroke-dashoffset: 50.2654824574;
     }
 }

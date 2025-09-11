@@ -10,8 +10,8 @@
 		<Title>Toost</Title>
 		<Authors>Saif Saidi (Saif Al-Saidi)</Authors>
 		<Description>Lightweight, fast, and easy-to-use toast notifications for Blazor applications.</Description>
-		<PackageVersion>1.0.0</PackageVersion>
-		<PackageReleaseNotes>Initial release: version 1.0.0</PackageReleaseNotes>
+		<PackageVersion>1.1.0</PackageVersion>
+		<PackageReleaseNotes>Initial release: version 1.1.0</PackageReleaseNotes>
 		<RepositoryUrl>https://github.com/saifsaidi/Toost</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

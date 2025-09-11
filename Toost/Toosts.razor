@@ -1,4 +1,4 @@
-@using Toost.Internal
+﻿@using Toost.Internal
 @inject ToostService ToostService
 @implements IDisposable
 
@@ -8,13 +8,16 @@
         <Toost @key="toast.Id"
                ToastInstance="toast"
                OnClose="() => RemoveToast(toast.Id)"
-               Style=@($"--index: {index}; --offset: {index * 4 }px; --scale: {1 - (index * 0.04)}; z-index: {Toasts.Count - index};") />
+               ShowTime="@ShowTime"
+               Style=@($"--index: {index}; --offset: {(Toasts.Count - 1 - index) * -0.5}rem; --scale: {1 - (index * 0.05)};") />
     }
 </div>
 
 @code {
     [Parameter] public Position Position { get; set; } = Position.BottomRight;
     private const int MAX_TOASTS = 3;
+
+    [Parameter] public bool ShowTime { get; set; } = false;
 
     private string PositionClass => Position switch
     {

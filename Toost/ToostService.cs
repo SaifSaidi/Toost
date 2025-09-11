@@ -1,8 +1,17 @@
+using Microsoft.Extensions.Options;
+
 namespace Toost;
 
 public sealed class ToostService
 {
+    private readonly ToostOptions _options;
+
     internal event EventHandler<ToostInstance>? OnShow;
+
+    public ToostService(IOptions<ToostOptions> options)
+    {
+        _options = options.Value;
+    }
 
     public void ShowToast(AlertType level, string message, int duration = 5000)
     {
@@ -30,16 +39,6 @@ public sealed class ToostService
         ShowToast(AlertType.Error, message, duration);
     }
 
-
-
-    private static readonly Dictionary<AlertType, string> Titles = new()
-    {
-        [AlertType.Success] = "Success",
-        [AlertType.Info] = "Info",
-        [AlertType.Warning] = "Warning",
-        [AlertType.Error] = "Error"
-    };
-
-    private static string GetTitle(AlertType level) =>
-        Titles.TryGetValue(level, out var title) ? title : "Notification";
+    private string GetTitle(AlertType level) =>
+        _options.Titles.TryGetValue(level, out var englishTitle) ? englishTitle : "Notification";
 }
